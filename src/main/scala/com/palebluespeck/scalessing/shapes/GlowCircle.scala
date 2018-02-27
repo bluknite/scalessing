@@ -28,13 +28,16 @@ class GlowCircle(var center: Position, var radius: Float, glowRatio: Float, over
     (glowRatio to 1 by step).foreach(ratio => {
       val r = ratio * radius
       val alpha = 255 * (glowRatio - ratio) / ratioDifference
-      Circle(center, r).setFill(fill.withAlpha(alpha)).draw()
+      Circle(center, r).withFill(fill.withAlpha(alpha)).draw()
     })
 
-    Circle(center, radius).setFill(fill).draw()
+    Circle(center, radius).withFill(fill).draw()
   }
 }
 object GlowCircle {
   def apply(center: Position, radius: Float, glowRatio: Float)(implicit app: ScalessingApp): GlowCircle =
     new GlowCircle(center, radius, glowRatio, app)
+  def apply(center: Position, radius: Double, glowRatio: Double)(implicit app: ScalessingApp): GlowCircle =
+    new GlowCircle(center, radius.toFloat, glowRatio.toFloat, app)
+
 }

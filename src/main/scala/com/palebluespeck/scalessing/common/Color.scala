@@ -2,6 +2,7 @@ package com.palebluespeck.scalessing.common
 
 sealed trait Color {
   def withAlpha(a: Float): Color
+  def withAlpha(a: Double): Color = withAlpha(a.toFloat)
 }
 
 case class Rgb(r: Float, g: Float, b: Float, alpha: Float) extends Color {

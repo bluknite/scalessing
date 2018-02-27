@@ -11,12 +11,12 @@ trait Shape[T <: Shape[T]] {
 
   def self: T
 
-  def setFill(color: Color): T = {
+  def withFill(color: Color): T = {
     fill = color
     self
   }
 
-  def setStroke(color: Color): T = {
+  def withStroke(color: Color): T = {
     stroke = color
     self
   }
