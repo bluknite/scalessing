@@ -4,12 +4,12 @@ case class Position(x: Float, y: Float) {
   def +(that: Position): Position = Position(this.x + that.x, this.y + that.y)
   def -(that: Position): Position = Position(this.x - that.x, this.y - that.y)
 
-  def distanceTo(that: Position): Double = {
+  def distanceTo(that: Position): Float = {
     val xDiff = this.x - that.x
     val yDiff = this.y - that.y
     val x2 = xDiff * xDiff
     val y2 = yDiff * yDiff
-    math.sqrt(x2 + y2)
+    math.sqrt(x2 + y2).toFloat
   }
 
   override def toString: String = f"($x%.3f, $y%.3f)"
