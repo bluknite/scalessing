@@ -22,3 +22,6 @@ class Circle(var center: Position, var radius: Float, override val app: Scalessi
     app.ellipse(center.x, center.y, radius, radius)
   }
 }
+object Circle {
+  def apply(center: Position, radius: Float)(implicit app: ScalessingApp): Circle = new Circle(center, radius, app)
+}
