@@ -13,4 +13,10 @@ class ScalessingApp extends PApplet {
     case g:Gray => fill(g.gray, g.alpha)
     case c:Rgb => fill(c.r, c.g, c.b, c.alpha)
   }
+
+  def stroke(color: Color): Unit = color match {
+    case NoColor => noStroke()
+    case g: Gray => stroke(g.gray, g.alpha)
+    case c: Rgb => stroke(c.r, c.g, c.b, c.alpha)
+  }
 }
