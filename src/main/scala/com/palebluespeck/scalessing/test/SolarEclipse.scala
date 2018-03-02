@@ -1,7 +1,7 @@
 package com.palebluespeck.scalessing.test
 
 import com.palebluespeck.scalessing.common._
-import com.palebluespeck.scalessing.shapes.{Circle, GlowCircle}
+import com.palebluespeck.scalessing.shapes.{Circle, Glow, Square}
 import com.palebluespeck.scalessing.{ScalessingApp, ScalessingRunner}
 
 class SolarEclipse extends ScalessingApp {
@@ -17,15 +17,15 @@ class SolarEclipse extends ScalessingApp {
 
   val size: Double = 50
 
-  val sun: Sun = Sun((80, 80), size)
-  val moon: Moon = Moon((130, -20), 1.35 * size)
+  val sun: Glow[Circle] = Glow(Circle(size).withFill(Rgb(255, 255, 180)), 1.5).withPosition((80, 80))
+  val moon: Circle = Circle(1.35 * size).withPosition((130, -20))
 
   val darkSkyDistance: Double = size/4
   val numberOfStars: Int = 1000
 
   lazy val starPositions: Seq[Position] = (1 to numberOfStars).map(_ => randomScreenPosition())
   lazy val starSizes: Seq[Float] = (1 to numberOfStars).map(_ => randomFloat(1, 2))
-  lazy val stars: Seq[Circle] = starPositions.zip(starSizes).map(s => Circle(s._1, s._2).withFill(Gray(200)))
+  lazy val stars: Seq[Circle] = starPositions.zip(starSizes).map(s => Circle(s._2).withPosition(s._1).withFill(Gray(200)))
 
   private def randomScreenPosition(): Position = (randomFloat(width), randomFloat(height))
   private def randomFloat(max: Float): Float = (math.random() * max).toFloat
@@ -34,7 +34,7 @@ class SolarEclipse extends ScalessingApp {
   override def draw(): Unit = {
     clear()
 
-    val distance = math.max(sun.center.distanceTo(moon.center) - size/20, 0)
+    val distance = math.max(sun.position.distanceTo(moon.position) - size/20, 0)
     lazy val distanceRatio = distance / darkSkyDistance
     val darken = if (distance > darkSkyDistance) 1 else distanceRatio
 
@@ -51,17 +51,13 @@ class SolarEclipse extends ScalessingApp {
     sun.draw()
     moon.withFill(Rgb(150 * darken, 200 * darken, 255 * darken)).draw()
 
+    Glow(Square(50).withFill(Gray(100)), 3)
+      .withPosition(Position(40, 100))
+      .withFill(Rgb(150, 50, 50))
+      .draw()
+
     sun + (1, 1)
     moon + (0.9F, 1.2F)
-  }
-
-  case class Moon(position: Position, size: Double) extends Circle(position, size.toFloat, app) {
-    def +(p: Position): Unit = setCenter(center + p)
-  }
-
-  case class Sun(position: Position, size: Double) extends GlowCircle(position, size.toFloat, 1.5F, app) {
-    withFill(Rgb(255, 255, 180))
-    def +(p: Position): Unit = setCenter(center + p)
   }
 }
 
