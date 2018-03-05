@@ -6,13 +6,13 @@ import processing.core.PConstants
 class Square(var side: Float) extends Shape[Square] {
   override def self: Square = this
 
-  def setSize(size: Float): Square = {
-    this.side = size
+  def setSide(side: Float): Square = {
+    this.side = side
     self
   }
 
   override protected def clonedShape: Square = Square(side)
-  override def scaled(s: Float): Square = cloned.setSize(s * side)
+  override def scaled(s: Float): Square = cloned.setSide(s * side)
 
   override def drawShape(): Unit = {
     app.rectMode(PConstants.CENTER)

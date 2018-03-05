@@ -1,6 +1,10 @@
 package com.palebluespeck.scalessing.common
 
 sealed trait Color {
+  val r: Float
+  val g: Float
+  val b: Float
+
   def withAlpha(a: Float): Color
   def withAlpha(a: Double): Color = withAlpha(a.toFloat)
 }
@@ -16,6 +20,10 @@ object Rgb {
 }
 
 case class Gray(gray: Float, alpha: Float) extends Color {
+  val r: Float = gray
+  val g: Float = gray
+  val b: Float = gray
+
   override def withAlpha(a: Float): Color = Gray(gray, a)
 }
 object Gray {
@@ -27,4 +35,7 @@ object Gray {
 
 object NoColor extends Color {
   override def withAlpha(a: Float): Color = ??? // not applicable
+  override val r: Float = 0 // not applicable
+  override val g: Float = 0 // not applicable
+  override val b: Float = 0 // not applicable
 }

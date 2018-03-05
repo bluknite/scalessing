@@ -1,7 +1,7 @@
 package com.palebluespeck.scalessing.test
 
 import com.palebluespeck.scalessing.common._
-import com.palebluespeck.scalessing.shapes.{Circle, Glow, Square}
+import com.palebluespeck.scalessing.shapes._
 import com.palebluespeck.scalessing.{ScalessingApp, ScalessingRunner}
 
 class SolarEclipse extends ScalessingApp {
@@ -17,8 +17,8 @@ class SolarEclipse extends ScalessingApp {
 
   val size: Double = 50
 
-  val sun: Glow[Circle] = Glow(Circle(size).withFill(Rgb(255, 255, 180)), 1.5).withPosition((80, 80))
-  val moon: Circle = Circle(1.35 * size).withPosition((130, -20))
+  private val sun = Glow(Circle(size).withFill(Rgb(255, 255, 180)), 1.5).withFill(Rgb(255, 255, 220)).withPosition((80, 80))
+  private val moon = Circle(1.35 * size).withPosition((130, -20))
 
   val darkSkyDistance: Double = size/4
   val numberOfStars: Int = 1000
@@ -50,11 +50,6 @@ class SolarEclipse extends ScalessingApp {
 
     sun.draw()
     moon.withFill(Rgb(150 * darken, 200 * darken, 255 * darken)).draw()
-
-    Glow(Square(50).withFill(Gray(100)), 3)
-      .withPosition(Position(40, 100))
-      .withFill(Rgb(150, 50, 50))
-      .draw()
 
     sun + (1, 1)
     moon + (0.9F, 1.2F)

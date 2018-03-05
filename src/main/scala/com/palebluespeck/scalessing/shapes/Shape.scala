@@ -46,6 +46,7 @@ trait Shape[T <: Shape[T]] {
   protected def clonedShape: T
 
   def scaled(s: Float): T
+  def scaled(s: Double): T = scaled(s.toFloat)
 
   def drawShape(): Unit
 }

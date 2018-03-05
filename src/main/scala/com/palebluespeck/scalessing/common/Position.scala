@@ -3,6 +3,7 @@ package com.palebluespeck.scalessing.common
 case class Position(x: Float, y: Float) {
   def +(that: Position): Position = Position(this.x + that.x, this.y + that.y)
   def -(that: Position): Position = Position(this.x - that.x, this.y - that.y)
+  def *(scalar: Float): Position = Position(scalar * this.x, scalar * this.y)
 
   def distanceTo(that: Position): Float = {
     val xDiff = this.x - that.x
