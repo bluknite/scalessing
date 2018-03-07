@@ -35,7 +35,9 @@ trait Shape[T <: Shape[T]] {
   def draw(): Unit = {
     app.fill(fill)
     app.stroke(stroke)
+    app.translate(position)
     drawShape()
+    app.translate(-position)
   }
 
   final def cloned: T = clonedShape

@@ -12,11 +12,6 @@ class Polygon(var vertices: List[Position]) extends Shape[Polygon] {
     self
   }
 
-  override def withPosition(position: Position): Polygon = {
-    super.withPosition(position)
-    setVertices(vertices.map(_ + position))
-  }
-
   override protected def clonedShape: Polygon = Polygon(vertices)
 
   override def scaled(s: Float): Polygon = {

@@ -1,6 +1,6 @@
 package com.palebluespeck.scalessing
 
-import com.palebluespeck.scalessing.common.{Color, Gray, NoColor, Rgb}
+import com.palebluespeck.scalessing.common._
 import processing.core.PApplet
 
 class ScalessingApp extends PApplet {
@@ -19,4 +19,7 @@ class ScalessingApp extends PApplet {
     case g: Gray => stroke(g.gray, g.alpha)
     case c: Rgb => stroke(c.r, c.g, c.b, c.alpha)
   }
+
+  def translate(position: Position): Unit =
+    translate(position.x, position.y)
 }

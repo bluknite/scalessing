@@ -15,7 +15,7 @@ class SolarEclipse extends ScalessingApp {
     noStroke()
   }
 
-  val size: Double = 50
+  val size: Double = 100
 
   private val sun = Glow(Circle(size).withFill(Rgb(255, 255, 180)), 1.5).withFill(Rgb(255, 255, 220)).withPosition((80, 80))
   private val moon = Circle(1.35 * size).withPosition((130, -20))

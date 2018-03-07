@@ -16,12 +16,6 @@ class Glow[T <: Shape[T]](var shape: Shape[T], glowRatio: Float) extends Shape[G
     self
   }
 
-  override def withPosition(position: Position): Glow[T] = {
-    super.withPosition(position)
-    shape.withPosition(position)
-    self
-  }
-
   override protected def clonedShape: Glow[T] = Glow(shape.cloned, glowRatio)
 
   override def scaled(s: Float): Glow[T] = cloned.withShape(shape.scaled(s))

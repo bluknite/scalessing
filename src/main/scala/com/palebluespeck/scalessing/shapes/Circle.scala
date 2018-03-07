@@ -16,7 +16,7 @@ class Circle(var radius: Float) extends Shape[Circle] {
 
   override def drawShape(): Unit = {
     app.ellipseMode(PConstants.RADIUS)
-    app.ellipse(position.x, position.y, radius, radius)
+    app.ellipse(0, 0, radius, radius)
     app.ellipseMode(PConstants.CENTER)
   }
 }

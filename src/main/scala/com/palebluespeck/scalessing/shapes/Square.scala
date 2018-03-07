@@ -16,7 +16,7 @@ class Square(var side: Float) extends Shape[Square] {
 
   override def drawShape(): Unit = {
     app.rectMode(PConstants.CENTER)
-    app.rect(position.x, position.y, side, side)
+    app.rect(0, 0, side, side)
     app.rectMode(PConstants.CORNER)
   }
 }
