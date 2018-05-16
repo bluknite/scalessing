@@ -1,7 +1,7 @@
 name := "scalessing"
 organization := "com.palebluespeck"
 
-version := "0.2-SNAPSHOT"
+version := "0.3-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
