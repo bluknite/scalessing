@@ -8,6 +8,20 @@ sealed trait Color {
   def withAlpha(a: Float): Color
   def withAlpha(a: Double): Color = withAlpha(a.toFloat)
 }
+object Color {
+  def apply(hex: String, alpha: Double): Color = {
+    val (r, g, b) = hexToTriple(hex)
+    Rgb(r, g, b, alpha)
+  }
+
+  def apply(hex: String): Color = Color(hex, 255)
+
+  private def hexToTriple(hex: String): (Int, Int, Int) = {
+    val pieces = hex.grouped(2).map(g => Integer.parseInt(g, 16)).toList
+    val r::g::b::Nil = pieces
+    (r, g, b)
+  }
+}
 
 case class Rgb(r: Float, g: Float, b: Float, alpha: Float) extends Color {
   override def withAlpha(a: Float): Color = Rgb(r, g, b, a)

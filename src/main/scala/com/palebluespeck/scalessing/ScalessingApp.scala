@@ -20,6 +20,11 @@ class ScalessingApp extends PApplet {
     case c: Rgb => stroke(c.r, c.g, c.b, c.alpha)
   }
 
+  def background(color: Color): Unit = color match {
+    case g: Gray => background(g.gray, g.alpha)
+    case c: Rgb => background(c.r, c.g, c.b, c.alpha)
+  }
+
   def translate(position: Position): Unit =
     translate(position.x, position.y)
 }
