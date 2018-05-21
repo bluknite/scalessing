@@ -56,46 +56,51 @@ class DonutChart(var radius: Double,
         if (d > 0) {
           val p = (d * multiplier) / total
           val angleSize = (PConstants.TWO_PI * p).toFloat
-          app.fill(c)
           val endAngle = startAngle + angleSize
+          app.fill(c)
           app.arc(0, 0, twiceRadius, twiceRadius, startAngle, endAngle, PConstants.PIE)
 
-          val labelAngle = startAngle + (angleSize / 2)
-          app.rotate(labelAngle)
-          Circle(3).withPosition(Position(radius, 0)).withFill(Color("A6A6A6")).draw()
-          app.translate(Position(radius, 0))
-          app.stroke(Color("A6A6A6"))
-          app.line(0, 0, 50, 0)
-          Circle(3).withPosition(Position(50, 0)).withFill(Color("A6A6A6")).draw()
-          app.translate(Position(50 + labelDistance, 0))
-          app.rotate(-labelAngle)
-          app.fill(Color("A6A6A6"))
-          app.textSize(9)
-          if (labelAngle < PConstants.HALF_PI) {
-            app.textAlign(PConstants.LEFT, PConstants.CENTER)
-            app.text(l, 0, 0)
-          }
-          else {
-            app.textAlign(PConstants.RIGHT, PConstants.CENTER)
-            app.text(l, 0, 0)
-          }
-          app.rotate(labelAngle)
-          app.translate(-Position(50 + labelDistance, 0))
-          app.translate(-Position(radius, 0))
-          app.rotate(-labelAngle)
+          drawLabel(startAngle + (angleSize / 2), l)
 
           startAngle = endAngle
         }
       })
       Circle(innerRadius).withFill(background).draw()
     }
-    if (title.isDefined) {
-      app.textAlign(PConstants.CENTER, PConstants.CENTER)
-      app.textSize(14)
-      if (data.isEmpty) app.fill(Color("A6A6A6"))
-      else app.fill(Color("F2F2F2"))
-      app.text(title.get.toUpperCase, 0, 0)
+    drawTitle()
+  }
+
+  def drawLabel(labelAngle: Float, label: String): Unit = {
+    app.rotate(labelAngle)
+    Circle(3).withPosition(Position(radius, 0)).withFill(Color("A6A6A6")).draw()
+    app.translate(Position(radius, 0))
+    app.stroke(Color("A6A6A6"))
+    app.line(0, 0, 50, 0)
+    Circle(3).withPosition(Position(50, 0)).withFill(Color("A6A6A6")).draw()
+    app.translate(Position(50 + labelDistance, 0))
+    app.rotate(-labelAngle)
+    app.fill(Color("A6A6A6"))
+    app.textSize(9)
+    if (labelAngle < PConstants.HALF_PI) {
+      app.textAlign(PConstants.LEFT, PConstants.CENTER)
+      app.text(label, 0, 0)
     }
+    else {
+      app.textAlign(PConstants.RIGHT, PConstants.CENTER)
+      app.text(label, 0, 0)
+    }
+    app.rotate(labelAngle)
+    app.translate(-Position(50 + labelDistance, 0))
+    app.translate(-Position(radius, 0))
+    app.rotate(-labelAngle)
+  }
+
+  def drawTitle(): Unit = if (title.isDefined) {
+    app.textAlign(PConstants.CENTER, PConstants.CENTER)
+    app.textSize(14)
+    if (data.isEmpty) app.fill(Color("A6A6A6"))
+    else app.fill(Color("F2F2F2"))
+    app.text(title.get.toUpperCase, 0, 0)
   }
 }
 object DonutChart {
